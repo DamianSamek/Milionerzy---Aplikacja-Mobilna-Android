@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:gravity="top"
+    android:background="@drawable/back">
+
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:src="@drawable/main_logo"
+        android:contentDescription="@string/descripcion_main_logo" />
+
+    <Button
+        android:id="@+id/buttonPlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:background="@drawable/button_opcion"
+        android:textStyle="bold"
+        style="@style/TextoConSombra"
+        android:textColor="#FFFFFF"
+        android:text="@string/menu_nowa_gra"/>
+
+    <Button
+        android:id="@+id/buttonScores"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_opcion"
+        android:textStyle="bold"
+        style="@style/TextoConSombra"
+        android:textColor="#FFFFFF"
+        android:text="@string/menu_ranking"/>
+
+</LinearLayout>

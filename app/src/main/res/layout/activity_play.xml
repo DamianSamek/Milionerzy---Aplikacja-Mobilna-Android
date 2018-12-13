@@ -1,0 +1,143 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/back" >
+
+    <Button
+        android:id="@+id/buttonHeaderPlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/header"
+        android:gravity="center|right"
+        style="@style/TituloConSombra"
+        android:text="@string/gra_pytanie" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textViewPlayingFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/gra_grasz_o"
+            style="@style/TextoConSombra"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textViewMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/play_current"
+            style="@style/TituloConSombra"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/LinearLayout02"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="right"
+        android:layout_alignParentBottom="true">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"/>
+        <Button
+            android:id="@+id/menuItemAudience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:background="@drawable/icon_audience">
+        </Button>
+        <Button
+            android:id="@+id/menuItem50"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:background="@drawable/icon_50">
+        </Button>
+        <Button
+            android:id="@+id/menuItemPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:background="@drawable/icon_phone">
+        </Button>
+        <Button
+            android:id="@+id/menuItemEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:background="@drawable/icon_exit">
+        </Button>
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/textViewQuestion"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="center|center"
+        style="@style/TextoConSombra"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom|center" >
+
+        <Button
+            android:id="@+id/buttonoptionA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/play_opcion_a"
+            style="@style/TextoConSombra"
+            android:textStyle="bold"
+            android:background="@drawable/button_opcion"/>
+
+        <Button
+            android:id="@+id/buttonoptionB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/play_opcion_b"
+            style="@style/TextoConSombra"
+            android:textStyle="bold"
+            android:background="@drawable/button_opcion"/>
+
+        <Button
+            android:id="@+id/buttonoptionC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/play_opcion_c"
+            style="@style/TextoConSombra"
+            android:textStyle="bold"
+            android:background="@drawable/button_opcion"/>
+
+        <Button
+            android:id="@+id/buttonoptionD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/play_opcion_d"
+            style="@style/TextoConSombra"
+            android:textStyle="bold"
+            android:background="@drawable/button_opcion"/>
+
+    </LinearLayout>
+
+</LinearLayout>

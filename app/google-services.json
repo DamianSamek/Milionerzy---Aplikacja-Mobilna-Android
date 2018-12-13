@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "609183965906",
+    "firebase_url": "https://millionaire-c5861.firebaseio.com",
+    "project_id": "millionaire-c5861",
+    "storage_bucket": "millionaire-c5861.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609183965906:android:a69f56f4870a455b",
+        "android_client_info": {
+          "package_name": "ur.edu.pl.millionaire"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609183965906-d3cu706mpnhcdtkm0aquvqecocj4vbf9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ur.edu.pl.millionaire",
+            "certificate_hash": "35b4a4232dad4189594295a7fad31a8e7464d210"
+          }
+        },
+        {
+          "client_id": "609183965906-8ma3n1u6l847iu01190gjgqnuiidc51t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAap8h9xquLo1zWmzogrEaBzKLu0DMyDQU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609183965906-8ma3n1u6l847iu01190gjgqnuiidc51t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
