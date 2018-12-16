@@ -1,79 +1,49 @@
 package ur.edu.pl.millionaire;
 
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 import java.util.Random;
-/*
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair; */
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import android.R.drawable;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import ur.edu.pl.millionaire.model.Question;
-
-import static android.content.ContentValues.TAG;
+import ur.edu.pl.millionaire.model.Result;
 
 public class PlayActivity extends Activity {
 
-    Button menuItemPhone;
-    Button menuItem50;
-    Button menuItemAudience;
-    Button menuItemEnd;
-    Button optionA,optionB,optionC,optionD;
-    Button header;
+    final Context context = this;
+    private EditText result;
+    AlertDialog.Builder alertDialogBuilder;
+
+    private DatabaseReference database;
+    Button menuItemPhone, menuItem50, menuItemAudience, menuItemEnd,optionA, optionB,optionC,optionD,header;
     TextView question, money;
-    int level;
-    int lifelinesAvailable=3;
-    int fifty1,fifty2,correct,audiencia,telefono;
+    String name;
+
+    int level, elapsedSeconds, elapsedMinutes, secondsAfterConversion,score,lifelinesAvailable=3,fifty1,fifty2,
+            correct,audienceAnswer,phoneAnswer,phoneStatus=0,audienceStatus=0,status50=0;
     ArrayList<Question> questions;
     Random random;
-
-    String[] score;
-
-    boolean bUsadoTelef=false,bUsadoAudience=false,bUsado50=false;
+    long tStart, tEnd;
+    String[] scores;
     boolean bContinue=false;
 
-    int phoneStatus=0;
-    int audienceStatus=0;
-    int status50=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,33 +51,11 @@ public class PlayActivity extends Activity {
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_play);
-
+        tStart = System.currentTimeMillis();
         playTheGame();
-
-        score = getResources().getStringArray(R.array.tablica_kwot);
-        question=(TextView)findViewById(R.id.textViewQuestion);
-        money=(TextView)findViewById(R.id.textViewMoney);
-        header=(Button)findViewById(R.id.buttonHeaderPlay);
-        optionA=(Button)findViewById(R.id.buttonoptionA);
-        optionA.setOnClickListener(handleroptionA);
-        optionB=(Button)findViewById(R.id.buttonoptionB);
-        optionB.setOnClickListener(handleroptionB);
-        optionC=(Button)findViewById(R.id.buttonoptionC);
-        optionC.setOnClickListener(handleroptionC);
-        optionD=(Button)findViewById(R.id.buttonoptionD);
-        optionD.setOnClickListener(handleroptionD);
-        menuItemPhone=(Button)findViewById(R.id.menuItemPhone);
-        menuItemPhone.setOnClickListener(handlermenuItemPhone);
-        menuItem50=(Button)findViewById(R.id.menuItem50);
-        menuItem50.setOnClickListener(handlermenuItem50);
-        menuItemAudience=(Button)findViewById(R.id.menuItemAudience);
-        menuItemAudience.setOnClickListener(handlermenuItemAudience);
-        menuItemEnd=(Button)findViewById(R.id.menuItemEnd);
-        menuItemEnd.setOnClickListener(handlermenuItemEnd);
-
+        attachViewsToElements();
         level=0;
 
-//        restoreData();
 
         if(bContinue==false){
             phoneStatus = 0;
@@ -115,7 +63,6 @@ public class PlayActivity extends Activity {
             audienceStatus = 0;
         }
 
-//        saveData();
         playTheGame.run();
 
     }
@@ -156,12 +103,12 @@ public class PlayActivity extends Activity {
         int questionIndex = random.nextInt((max - min) + 1) + min;
 
         Question questionToRead = questions.get(questionIndex);
-        optionA.setText(questionToRead.getOptionA());
-        optionB.setText(questionToRead.getOptionB());
-        optionC.setText(questionToRead.getOptionC());
-        optionD.setText(questionToRead.getOptionD());
+        optionA.setText("A: "+questionToRead.getOptionA());
+        optionB.setText("B: "+questionToRead.getOptionB());
+        optionC.setText("C: "+questionToRead.getOptionC());
+        optionD.setText("D: "+questionToRead.getOptionD());
         question.setText(questionToRead.getQuestion());
-        money.setText(getResources().getStringArray(R.array.tablica_kwot)[level]);
+        money.setText(getResources().getStringArray(R.array.tablica_kwot)[level]+" zł");
 
         ArrayList<Integer> answers = new ArrayList<>();
         for (int i=1; i<=4; i++)
@@ -174,13 +121,11 @@ public class PlayActivity extends Activity {
                 else if(questionToRead.getOptionC().equals(questionToRead.getCorrect())) {correct =3; fifty1=2; fifty2=4;}
                 else {correct=4; fifty1=1; fifty2=3;}
 
-        telefono=correct;
-        audiencia=correct;
+        phoneAnswer=correct;
+        audienceAnswer=correct;
+ }
 
 
-
-
-    }
 
     // Słuchacze
     View.OnClickListener handleroptionA = new View.OnClickListener() {
@@ -220,7 +165,7 @@ public class PlayActivity extends Activity {
             menuItemPhone.setEnabled(false);
 
                 phoneStatus=level;
-                aplicarComodinTelefono();
+                lifelinePhone();
 
             lifelinesAvailable--;
             if (lifelinesAvailable ==0) Toast.makeText(getApplicationContext(), R.string.NoHelp, Toast.LENGTH_LONG).show();
@@ -250,7 +195,7 @@ public class PlayActivity extends Activity {
             menuItemAudience.setEnabled(false);
 
                 audienceStatus=level;
-                aplicarComodinAudience();
+                lifelineAudience();
 
 
 
@@ -266,19 +211,12 @@ public class PlayActivity extends Activity {
     };
 
 
-   /* private void borrarSharedPrefsVar() {
-        SharedPreferences settings = getApplicationContext().getSharedPreferences("var", Context.MODE_PRIVATE);
-        settings.edit().clear().commit();
-    }*/
-
-
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.titleWarningExit)
-                    .setTitle(R.string.warning)
+            builder.setMessage("Czy chcesz zakończyć?")
+                    .setTitle("Wyjście")
                     .setCancelable(false)
 
                     .setNegativeButton(R.string.backAndNotSave,
@@ -286,7 +224,7 @@ public class PlayActivity extends Activity {
                                 public void onClick(DialogInterface dialog, int id) {
                                     level=0;
                                     bContinue=false;
-//                                    borrarSharedPrefsVar();
+
                                     finish();
 
                                 }
@@ -296,14 +234,6 @@ public class PlayActivity extends Activity {
                                 public void onClick(DialogInterface dialog, int id) {
 
                                 }
-                            })
-                    .setPositiveButton(R.string.backAndPause,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    bContinue = true;
-//                                    saveData();
-                                    finish();
-                                }
                             });
             AlertDialog alert = builder.create();
             alert.show();
@@ -311,31 +241,6 @@ public class PlayActivity extends Activity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-
-//    private void restoreData() {
-//        SharedPreferences preferences =
-//                getSharedPreferences("var", Context.MODE_PRIVATE);
-//        level=preferences.getInt("level",0);
-//        phoneStatus = preferences.getInt("phoneStatus", 0);
-//        audienceStatus = preferences.getInt("audienceStatus", 0);
-//        status50 = preferences.getInt("status50", 0);
-//        bContinue = preferences.getBoolean("continuar", false);
-//    }
-//
-//
-//    private void saveData()
-//    {
-//        SharedPreferences preferences =
-//                getSharedPreferences("var", Context.MODE_PRIVATE);
-//        Editor editor = preferences.edit();
-//        editor.putInt("level",level);
-//        editor.putInt("phoneStatus", phoneStatus);
-//        editor.putInt("audienceStatus", audienceStatus);
-//        editor.putInt("status50", status50);
-//        editor.putBoolean("continuar", bContinue);
-//        editor.commit();
-//    }
 
     private void lifeline50()
     {
@@ -353,9 +258,9 @@ public class PlayActivity extends Activity {
         }
     }
 
-    private void aplicarComodinTelefono()
+    private void lifelinePhone()
     {
-        switch(telefono){
+        switch(phoneAnswer){
             case 1:optionA.setBackgroundResource(R.drawable.button_opcion_selected);break;
             case 2:optionB.setBackgroundResource(R.drawable.button_opcion_selected);break;
             case 3:optionC.setBackgroundResource(R.drawable.button_opcion_selected);break;
@@ -363,9 +268,9 @@ public class PlayActivity extends Activity {
         }
     }
 
-    private void aplicarComodinAudience()
+    private void lifelineAudience()
     {
-        switch(audiencia){
+        switch(audienceAnswer){
             case 1:optionA.setBackgroundResource(R.drawable.button_opcion_selected);break;
             case 2:optionB.setBackgroundResource(R.drawable.button_opcion_selected);break;
             case 3:optionC.setBackgroundResource(R.drawable.button_opcion_selected);break;
@@ -508,7 +413,7 @@ public class PlayActivity extends Activity {
         Runnable clearButtons = new Runnable() {
             @Override
             public void run() {
-                //Przywrócenie funkcjonalności po użyciu opcji 50% w poprzednim pytaniu
+                //Przywrócenie funkcjonalności po użyciu koła ratunkowego w poprzednim pytaniu
                 optionA.setVisibility(Button.VISIBLE); optionA.setClickable(true);
                 optionB.setVisibility(Button.VISIBLE); optionB.setClickable(true);
                 optionC.setVisibility(Button.VISIBLE); optionC.setClickable(true);
@@ -521,6 +426,116 @@ public class PlayActivity extends Activity {
                 optionD.setBackgroundResource(R.drawable.button_opcion);
             }
         };
+
+
+
+    private void endGame(boolean giveUp) {
+        calculateWinningAmount(giveUp);
+        calculateTime();
+        putValuesToSharedPreferences();
+        nameDialog();
+    }
+
+    private void calculateWinningAmount(boolean giveUp) {
+        //Jeśli gracz się poddaje, wygrywa kwotę z poprzedniego pytania
+        //Jeśli gracz się nie poddaje, wygrywa kwotę z progu gwarantowanego
+        String[] amounts=getResources().getStringArray(R.array.tablica_kwot);
+        String aux;
+        score=0;
+        if(level-1>0){
+            aux=amounts[level-1];
+            score=Integer.valueOf(aux);
+        }
+        else {
+            if(level==0) score=0;
+            if(level==1) score=500;
+        }
+
+        if(!giveUp){
+            if(level<2)score=0;
+            else if(level>=2 && level<7)score=Integer.valueOf(amounts[1]);
+            else if(level>=7 && level<12)score=Integer.valueOf(amounts[6]);
+            else if(level==12)score=Integer.valueOf(amounts[11]);
+        }
+    }
+
+    private void calculateTime(){
+        tEnd = System.currentTimeMillis();
+        long tDelta = tEnd - tStart;
+        elapsedSeconds = (int)(tDelta / 1000.0);
+        elapsedMinutes = elapsedSeconds/60;
+        secondsAfterConversion = elapsedSeconds-elapsedMinutes*60;
+    }
+
+    private void putValuesToSharedPreferences() {
+        SharedPreferences myScore = getSharedPreferences("MyScore",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = myScore.edit();
+        editor.putInt("score",score);
+        editor.putInt("minutes",elapsedMinutes);
+        editor.putInt("seconds",secondsAfterConversion);
+        editor.commit();
+    }
+
+    private void nameDialog() {
+        LayoutInflater li = LayoutInflater.from(context);
+        View promptsView = li.inflate(R.layout.prompts, null);
+
+        alertDialogBuilder = new AlertDialog.Builder(
+                context);
+
+        alertDialogBuilder.setView(promptsView);
+
+        final EditText userInput = promptsView
+                .findViewById(R.id.editTextDialogUserInput);
+
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+
+                                result.setText(userInput.getText());
+                                name = userInput.getText().toString();
+                                saveToDB();
+                            }
+                        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+    }
+
+    private void saveToDB(){
+        database = FirebaseDatabase.getInstance().getReference("highscore");
+        database.push().setValue(new Result(name,score,elapsedMinutes,secondsAfterConversion,elapsedSeconds));
+        startActivity(new Intent(PlayActivity.this, ScoreActivity.class));
+        finish();
+    }
+
+    private void attachViewsToElements() {
+        scores = getResources().getStringArray(R.array.tablica_kwot);
+        question= findViewById(R.id.textViewQuestion);
+        money= findViewById(R.id.textViewMoney);
+        header= findViewById(R.id.buttonHeaderPlay);
+        optionA= findViewById(R.id.buttonoptionA);
+        optionA.setOnClickListener(handleroptionA);
+        optionB= findViewById(R.id.buttonoptionB);
+        optionB.setOnClickListener(handleroptionB);
+        optionC= findViewById(R.id.buttonoptionC);
+        optionC.setOnClickListener(handleroptionC);
+        optionD= findViewById(R.id.buttonoptionD);
+        optionD.setOnClickListener(handleroptionD);
+        menuItemPhone= findViewById(R.id.menuItemPhone);
+        menuItemPhone.setOnClickListener(handlermenuItemPhone);
+        menuItem50= findViewById(R.id.menuItem50);
+        menuItem50.setOnClickListener(handlermenuItem50);
+        menuItemAudience= findViewById(R.id.menuItemAudience);
+        menuItemAudience.setOnClickListener(handlermenuItemAudience);
+        menuItemEnd= findViewById(R.id.menuItemEnd);
+        menuItemEnd.setOnClickListener(handlermenuItemEnd);
+
+        result = (EditText) findViewById(R.id.editTextResult);
+    }
 
     Runnable playTheGame= new Runnable()
     {
@@ -541,41 +556,9 @@ public class PlayActivity extends Activity {
     //
     Runnable runnableEndGame= new Runnable() {
         @Override
-       public void run() {
-           endGame(false);
+        public void run() {
+            endGame(false);
         }
-    };
-
-    private void endGame(boolean giveUp) {
-        //Jeśli gracz się poddaje, wygrywa kwotę z poprzedniego pytania
-        //Jeśli gracz się nie poddaje, wygrywa kwotę z progu gwarantowanego
-        String[] amounts=getResources().getStringArray(R.array.tablica_kwot);
-        String aux;
-        int score=0;
-        if(level-1>0){
-            aux=amounts[level-1];
-            score=Integer.valueOf(aux);
-        }
-
-        if(!giveUp){
-            if(level-1<2)score=0;
-            else if(level-1>=2 && level-1<7)score=Integer.valueOf(amounts[2]);
-            else if(level-1>=7 && level-1<12)score=Integer.valueOf(amounts[7]);
-            else if(level-1==12)score=Integer.valueOf(amounts[12]);
-        }
-
-
-
-        startActivity(new Intent(PlayActivity.this, ScoreActivity.class));
-        finish();
-    }
-
-//
-    private String loadPreferencesName() {
-        SharedPreferences preferences =
-                getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        String nombre=preferences.getString("nombre", "");
-        return nombre;
     };
 
 }

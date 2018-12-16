@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:src="@drawable/main_logo"
-        android:contentDescription="@string/descripcion_main_logo" />
+        android:contentDescription="main_logo" />
 
     <Button
         android:id="@+id/buttonPlay"

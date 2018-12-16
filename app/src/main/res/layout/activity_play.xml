@@ -31,7 +31,6 @@
             android:id="@+id/textViewMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/play_current"
             style="@style/TituloConSombra"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -106,7 +105,6 @@
             android:id="@+id/buttonoptionA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/play_opcion_a"
             style="@style/TextoConSombra"
             android:textStyle="bold"
             android:background="@drawable/button_opcion"/>
@@ -115,7 +113,6 @@
             android:id="@+id/buttonoptionB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/play_opcion_b"
             style="@style/TextoConSombra"
             android:textStyle="bold"
             android:background="@drawable/button_opcion"/>
@@ -124,7 +121,6 @@
             android:id="@+id/buttonoptionC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/play_opcion_c"
             style="@style/TextoConSombra"
             android:textStyle="bold"
             android:background="@drawable/button_opcion"/>
@@ -133,10 +129,16 @@
             android:id="@+id/buttonoptionD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/play_opcion_d"
             style="@style/TextoConSombra"
             android:textStyle="bold"
             android:background="@drawable/button_opcion"/>
+
+        <EditText
+            android:id="@+id/editTextResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+        </EditText>
 
     </LinearLayout>
 

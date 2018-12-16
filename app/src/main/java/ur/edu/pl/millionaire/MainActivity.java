@@ -14,10 +14,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //getSupportActionBar().hide();
-       // this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-           //     WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         playButton = (Button)findViewById(R.id.buttonPlay);
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener scoreButtonHandler = new View.OnClickListener() {
         public void onClick(View v) {
             scoreButton.setBackgroundResource(R.drawable.button_opcion_selected);
-            startActivity(new Intent(MainActivity.this, ScoreActivity.class));
+            startActivity(new Intent(MainActivity.this, HighscoreActivity.class));
             scoreButton.postDelayed(swapSelectedScores, 500);
         }
     };
