@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/buttonHeaderPlay"
+        style="@style/TextWithShadow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/header"
+        android:text="Pytanie: "
+        android:textStyle="bold" />
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:id="@+id/textViewPlayingFor"
+            style="@style/TextWithShadow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grasz o: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textViewMoney"
+            style="@style/TitleWithShadow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/LinearLayout02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="right">
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/menuItemAudience"
+            app:layout_constraintEnd_toStartOf="@+id/menuItemAudience"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/menuItemAudience" />
+
+        <Button
+            android:id="@+id/menuItemAudience"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_audience"
+            app:layout_constraintBaseline_toBaselineOf="@+id/menuItem50"
+            app:layout_constraintEnd_toStartOf="@+id/menuItem50"
+            app:layout_constraintStart_toEndOf="@+id/textView"></Button>
+
+        <Button
+            android:id="@+id/menuItem50"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/icon_50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/menuItemPhone"
+            app:layout_constraintStart_toEndOf="@+id/menuItemAudience"></Button>
+
+        <Button
+            android:id="@+id/menuItemPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_phone"
+            app:layout_constraintBaseline_toBaselineOf="@+id/menuItem50"
+            app:layout_constraintEnd_toStartOf="@+id/menuItemEnd"
+            app:layout_constraintStart_toEndOf="@+id/menuItem50"></Button>
+
+        <Button
+            android:id="@+id/menuItemEnd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_exit"
+            app:layout_constraintBaseline_toBaselineOf="@+id/menuItemPhone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/menuItemPhone"></Button>
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textViewQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center|center"
+        style="@style/TextWithShadow"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="20dp" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp" >
+
+            <Button
+                android:id="@+id/buttonoptionA"
+                style="@style/TextWithShadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/button_opcion"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/buttonoptionB"
+                style="@style/TextWithShadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/button_opcion"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/buttonoptionC"
+                style="@style/TextWithShadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/button_opcion"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/buttonoptionD"
+                style="@style/TextWithShadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/button_opcion"
+                android:textStyle="bold" />
+        </TableRow>
+    </TableLayout>
+
+    <EditText
+        android:id="@+id/editTextResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    </EditText>
+
+</LinearLayout>

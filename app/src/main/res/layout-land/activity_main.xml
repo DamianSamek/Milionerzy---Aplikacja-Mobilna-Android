@@ -9,31 +9,31 @@
     <ImageView
         android:id="@+id/imageViewLogo"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="171dp"
         android:contentDescription="main_logo"
         android:gravity="center"
         android:src="@drawable/main_logo" />
 
     <Button
         android:id="@+id/buttonPlay"
-        style="@style/TextWithShadow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:background="@drawable/button_opcion"
-        android:text="@string/menu_nowa_gra"
+        android:textStyle="bold"
+        style="@style/TextWithShadow"
         android:textColor="#FFFFFF"
-        android:textStyle="bold" />
+        android:text="@string/menu_nowa_gra"/>
 
     <Button
         android:id="@+id/buttonScores"
-        style="@style/TextWithShadow"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_opcion"
-        android:clickable="true"
-        android:text="@string/menu_ranking"
+        android:textStyle="bold"
+        style="@style/TextWithShadow"
         android:textColor="#FFFFFF"
-        android:textStyle="bold" />
+        android:text="@string/menu_ranking"/>
 
 </LinearLayout>

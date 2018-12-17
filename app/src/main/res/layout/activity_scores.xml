@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/header"
         android:gravity="center|right"
-        style="@style/TituloConSombra"
+        style="@style/TitleWithShadow"
         android:text="@string/twoj_wynik" />
 
     <TextView

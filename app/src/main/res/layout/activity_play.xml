@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/header"
         android:gravity="center|right"
-        style="@style/TituloConSombra"
+        style="@style/TitleWithShadow"
         android:text="@string/gra_pytanie" />
 
     <LinearLayout
@@ -24,14 +24,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="@string/gra_grasz_o"
-            style="@style/TextoConSombra"
+            style="@style/TextWithShadow"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/textViewMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TituloConSombra"
+            style="@style/TitleWithShadow"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
@@ -92,7 +92,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:gravity="center|center"
-        style="@style/TextoConSombra"
+        style="@style/TextWithShadow"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <LinearLayout
@@ -105,7 +105,7 @@
             android:id="@+id/buttonoptionA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextoConSombra"
+            style="@style/TextWithShadow"
             android:textStyle="bold"
             android:background="@drawable/button_opcion"/>
 
@@ -113,7 +113,7 @@
             android:id="@+id/buttonoptionB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextoConSombra"
+            style="@style/TextWithShadow"
             android:textStyle="bold"
             android:background="@drawable/button_opcion"/>
 
@@ -121,7 +121,7 @@
             android:id="@+id/buttonoptionC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextoConSombra"
+            style="@style/TextWithShadow"
             android:textStyle="bold"
             android:background="@drawable/button_opcion"/>
 
@@ -129,7 +129,7 @@
             android:id="@+id/buttonoptionD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextoConSombra"
+            style="@style/TextWithShadow"
             android:textStyle="bold"
             android:background="@drawable/button_opcion"/>
 
