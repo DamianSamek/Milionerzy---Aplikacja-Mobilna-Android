@@ -107,6 +107,8 @@
             android:layout_height="wrap_content"
             style="@style/TextWithShadow"
             android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:background="@drawable/button_opcion"/>
 
         <Button
@@ -115,6 +117,8 @@
             android:layout_height="wrap_content"
             style="@style/TextWithShadow"
             android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:background="@drawable/button_opcion"/>
 
         <Button
@@ -123,6 +127,8 @@
             android:layout_height="wrap_content"
             style="@style/TextWithShadow"
             android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:background="@drawable/button_opcion"/>
 
         <Button
@@ -131,6 +137,8 @@
             android:layout_height="wrap_content"
             style="@style/TextWithShadow"
             android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:background="@drawable/button_opcion"/>
 
         <EditText
